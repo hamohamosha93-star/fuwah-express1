@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -11,15 +12,15 @@ header{background:#102d50;color:white;padding:24px 18px;border-radius:0 0 24px 2
 .logo{font-size:27px;font-weight:bold;color:#ffca28}
 main{padding:18px}
 h2{font-size:21px}
-.welcome,.shop,.restaurant,.menu{background:white;border-radius:16px;padding:17px;margin-bottom:14px}
+.welcome,.restaurant,.menu{background:white;border-radius:16px;padding:17px;margin-bottom:14px}
 button{font-family:inherit;cursor:pointer}
 .start{background:#ffca28;border:0;padding:13px 22px;border-radius:10px;font-weight:bold}
 .categories,.restaurants{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.category,.restaurant{border:1px solid #e5eaf1;text-align:center;color:#142b48;font-size:16px;font-weight:bold}
+.category,.restaurant{border:1px solid #e5eaf1;text-align:center;color:#142b48;font-size:16px;font-weight:bold;background:white;border-radius:16px}
 .category{min-height:115px}
 .emoji{display:block;font-size:34px;margin-bottom:9px}
 .restaurant{padding:18px 8px}
-.restaurant span{display:block;font-size:28px;margin-bottom:10px}
+.restaurant span{display:block;font-size:30px;margin-bottom:10px}
 .restaurant small{display:block;color:#65748b;margin-top:7px}
 .page{display:none}
 .back{background:#102d50;color:white;border:0;padding:12px 22px;border-radius:10px;margin-bottom:15px}
@@ -38,9 +39,10 @@ footer{background:#102d50;color:white;text-align:center;padding:22px;margin-top:
 <div class="welcome">
 <h2>أهلاً بيك في فوه إكسبريس 👋</h2>
 <p>اطلب احتياجاتك من مكانك وإحنا نوصلها لحد عندك.</p>
-<button class="start" onclick="show('categories')">ابدأ التسوق</button>
+<button class="start" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">ابدأ التسوق</button>
 </div>
 
+<div id="shop">
 <h2>تسوق حسب القسم</h2>
 <div class="categories">
 <button class="category" onclick="show('restaurants')"><span class="emoji">🍔</span>مطاعم</button>
@@ -50,22 +52,23 @@ footer{background:#102d50;color:white;text-align:center;padding:22px;margin-top:
 <button class="category" onclick="coming('طرود وشحن')"><span class="emoji">📦</span>طرود وشحن</button>
 <button class="category" onclick="coming('مشاوير شخصية')"><span class="emoji">🛵</span>مشاوير شخصية</button>
 </div>
+</div>
 </section>
 
 <section id="restaurants" class="page">
 <button class="back" onclick="show('home')">→ رجوع للأقسام</button>
 <h2>🍔 مطاعم فوه</h2>
 <p>اختار المطعم اللي تحب تطلب منه</p>
+
 <div class="restaurants">
-<button class="restaurant" onclick="menu('صاحب السعادة')">
-<span>🍽️</span>صاحب السعادة<small>اضغط لعرض التفاصيل</small>
-</button>
-<button class="restaurant" onclick="menu('هتاكل إيه؟')">
-<span>🍗</span>هتاكل إيه؟<small>اضغط لعرض التفاصيل</small>
-</button>
-<button class="restaurant" onclick="menu('مكسيكانو')">
-<span>🌮</span>مكسيكانو<small>اضغط لعرض التفاصيل</small>
-</button>
+<button class="restaurant" onclick="menu('صاحب السعادة')"><span>🍽️</span>صاحب السعادة<small>عرض التفاصيل</small></button>
+<button class="restaurant" onclick="menu('هتاكل إيه؟')"><span>🍗</span>هتاكل إيه؟<small>عرض التفاصيل</small></button>
+<button class="restaurant" onclick="menu('مكسيكانو')"><span>🌮</span>مكسيكانو<small>عرض التفاصيل</small></button>
+<button class="restaurant" onclick="menu('حمزة')"><span>🍔</span>حمزة<small>عرض التفاصيل</small></button>
+<button class="restaurant" onclick="menu('أبو علي')"><span>🥙</span>أبو علي<small>عرض التفاصيل</small></button>
+<button class="restaurant" onclick="menu('المصري')"><span>🍕</span>المصري<small>عرض التفاصيل</small></button>
+<button class="restaurant" onclick="menu('أطياب')"><span>🍟</span>أطياب<small>عرض التفاصيل</small></button>
+<button class="restaurant" onclick="menu('كشري السلطان')"><span>🍲</span>كشري السلطان<small>عرض التفاصيل</small></button>
 </div>
 </section>
 
@@ -80,9 +83,11 @@ footer{background:#102d50;color:white;text-align:center;padding:22px;margin-top:
 
 <section id="other" class="page">
 <button class="back" onclick="show('home')">→ رجوع</button>
-<div class="menu"><h2 id="otherName"></h2><p>القسم ده قيد التجهيز.</p></div>
+<div class="menu">
+<h2 id="otherName"></h2>
+<p>القسم ده قيد التجهيز.</p>
+</div>
 </section>
-
 </main>
 
 <footer>فوه إكسبريس<br>طلبك علينا وراحتك تهمنا ❤️</footer>
@@ -105,10 +110,6 @@ show('details');
 function coming(name){
 document.getElementById('otherName').textContent=name;
 show('other');
-}
-function showCategories(){
-show('home');
-document.getElementById('home').scrollIntoView();
 }
 </script>
 </body>
