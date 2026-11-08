@@ -7,79 +7,108 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#f3f6fa;font-family:Arial;color:#142b48}
-header{background:#102d50;color:white;padding:25px 18px;border-radius:0 0 25px 25px}
-.logo{font-size:28px;font-weight:bold;color:#ffca28}
-header p{margin-bottom:0}
+header{background:#102d50;color:white;padding:24px 18px;border-radius:0 0 24px 24px}
+.logo{font-size:27px;font-weight:bold;color:#ffca28}
 main{padding:18px}
-.welcome,.category,.result{background:white;border-radius:16px;padding:18px;margin-bottom:14px}
-.welcome h2{margin-top:0}
+h2{font-size:21px}
+.welcome,.shop,.restaurant,.menu{background:white;border-radius:16px;padding:17px;margin-bottom:14px}
 button{font-family:inherit;cursor:pointer}
-.start{background:#ffca28;border:0;border-radius:10px;padding:13px 25px;font-weight:bold}
-h3{margin:15px 0}
-.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.category{border:1px solid #e5eaf1;text-align:center;min-height:120px;color:#142b48;font-size:17px;font-weight:bold}
-.category:active{background:#fff3c4}
-.emoji{font-size:35px;display:block;margin-bottom:9px}
-.result{display:none;line-height:1.8}
-.back{background:#102d50;color:white;border:0;border-radius:9px;padding:10px 20px}
-footer{text-align:center;background:#102d50;color:white;padding:22px}
+.start{background:#ffca28;border:0;padding:13px 22px;border-radius:10px;font-weight:bold}
+.categories,.restaurants{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.category,.restaurant{border:1px solid #e5eaf1;text-align:center;color:#142b48;font-size:16px;font-weight:bold}
+.category{min-height:115px}
+.emoji{display:block;font-size:34px;margin-bottom:9px}
+.restaurant{padding:18px 8px}
+.restaurant span{display:block;font-size:28px;margin-bottom:10px}
+.restaurant small{display:block;color:#65748b;margin-top:7px}
+.page{display:none}
+.back{background:#102d50;color:white;border:0;padding:12px 22px;border-radius:10px;margin-bottom:15px}
+footer{background:#102d50;color:white;text-align:center;padding:22px;margin-top:25px}
 </style>
 </head>
 <body>
+
 <header>
 <div class="logo">⚡ فوه إكسبريس</div>
 <p>كل طلباتك لحد باب بيتك</p>
 </header>
 
 <main>
-<div class="welcome" id="home">
+<section id="home">
+<div class="welcome">
 <h2>أهلاً بيك في فوه إكسبريس 👋</h2>
-<p>اطلب احتياجاتك من مكانك وإحنا نوصلها لحد باب بيتك.</p>
-<button class="start" onclick="showCategories()">ابدأ التسوق</button>
+<p>اطلب احتياجاتك من مكانك وإحنا نوصلها لحد عندك.</p>
+<button class="start" onclick="show('categories')">ابدأ التسوق</button>
 </div>
 
-<section id="shop">
-<h3>تسوق حسب القسم</h3>
+<h2>تسوق حسب القسم</h2>
 <div class="categories">
-<button class="category" onclick="openCategory('مطاعم')"><span class="emoji">🍔</span>مطاعم</button>
-<button class="category" onclick="openCategory('صيدليات')"><span class="emoji">💊</span>صيدليات</button>
-<button class="category" onclick="openCategory('سوبر ماركت')"><span class="emoji">🛒</span>سوبر ماركت</button>
-<button class="category" onclick="openCategory('خضار وفاكهة')"><span class="emoji">🍎</span>خضار وفاكهة</button>
-<button class="category" onclick="openCategory('طرود وشحن')"><span class="emoji">📦</span>طرود وشحن</button>
-<button class="category" onclick="openCategory('مشاوير شخصية')"><span class="emoji">🛵</span>مشاوير شخصية</button>
+<button class="category" onclick="show('restaurants')"><span class="emoji">🍔</span>مطاعم</button>
+<button class="category" onclick="coming('صيدليات')"><span class="emoji">💊</span>صيدليات</button>
+<button class="category" onclick="coming('سوبر ماركت')"><span class="emoji">🛒</span>سوبر ماركت</button>
+<button class="category" onclick="coming('خضار وفاكهة')"><span class="emoji">🍎</span>خضار وفاكهة</button>
+<button class="category" onclick="coming('طرود وشحن')"><span class="emoji">📦</span>طرود وشحن</button>
+<button class="category" onclick="coming('مشاوير شخصية')"><span class="emoji">🛵</span>مشاوير شخصية</button>
 </div>
 </section>
 
-<div class="result" id="result">
-<h2 id="chosen"></h2>
-<p>القسم ده جاهز لاستقبال المحلات والطلبات. سيتم إضافة المتاجر والمنتجات قريباً.</p>
-<button class="back" onclick="goBack()">رجوع للأقسام</button>
+<section id="restaurants" class="page">
+<button class="back" onclick="show('home')">→ رجوع للأقسام</button>
+<h2>🍔 مطاعم فوه</h2>
+<p>اختار المطعم اللي تحب تطلب منه</p>
+<div class="restaurants">
+<button class="restaurant" onclick="menu('صاحب السعادة')">
+<span>🍽️</span>صاحب السعادة<small>اضغط لعرض التفاصيل</small>
+</button>
+<button class="restaurant" onclick="menu('هتاكل إيه؟')">
+<span>🍗</span>هتاكل إيه؟<small>اضغط لعرض التفاصيل</small>
+</button>
+<button class="restaurant" onclick="menu('مكسيكانو')">
+<span>🌮</span>مكسيكانو<small>اضغط لعرض التفاصيل</small>
+</button>
 </div>
+</section>
 
-<div class="welcome">
-<strong>📍 خدماتنا داخل فوه وضواحيها</strong>
-<p>الجودة قبل أي حاجة ❤️</p>
+<section id="details" class="page">
+<button class="back" onclick="show('restaurants')">→ رجوع للمطاعم</button>
+<div class="menu">
+<h2 id="restaurantName"></h2>
+<p>قريباً هنضيف المنيو والأسعار وصور الأكلات الخاصة بالمطعم.</p>
+<p>فوه إكسبريس – الجودة قبل أي حاجة ❤️</p>
 </div>
+</section>
+
+<section id="other" class="page">
+<button class="back" onclick="show('home')">→ رجوع</button>
+<div class="menu"><h2 id="otherName"></h2><p>القسم ده قيد التجهيز.</p></div>
+</section>
+
 </main>
 
-<footer>فوه إكسبريس | طلبك علينا وراحتك تهمنا</footer>
+<footer>فوه إكسبريس<br>طلبك علينا وراحتك تهمنا ❤️</footer>
 
 <script>
-function showCategories(){
-document.getElementById('shop').scrollIntoView({behavior:'smooth'});
-}
-function openCategory(name){
-document.getElementById('shop').style.display='none';
+function show(id){
 document.getElementById('home').style.display='none';
-document.getElementById('result').style.display='block';
-document.getElementById('chosen').textContent='قسم '+name;
+document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+if(id==='home'){
+document.getElementById('home').style.display='block';
+}else{
+document.getElementById(id).style.display='block';
+}
 window.scrollTo(0,0);
 }
-function goBack(){
-document.getElementById('result').style.display='none';
-document.getElementById('shop').style.display='block';
-document.getElementById('home').style.display='block';
-window.scrollTo(0,0);
+function menu(name){
+document.getElementById('restaurantName').textContent='🍽️ '+name;
+show('details');
+}
+function coming(name){
+document.getElementById('otherName').textContent=name;
+show('other');
+}
+function showCategories(){
+show('home');
+document.getElementById('home').scrollIntoView();
 }
 </script>
 </body>
