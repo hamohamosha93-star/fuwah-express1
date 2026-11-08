@@ -2,88 +2,85 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فوه إكسبريس | اطلب كل اللي محتاجه</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>فوه إكسبريس</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#17243a}
-header{background:#102d50;color:white;padding:22px 18px;border-radius:0 0 25px 25px}
-.logo{font-size:27px;font-weight:bold;color:#ffca28}
-header p{margin:9px 0 0;font-size:14px}
-.search{margin:18px auto;padding:14px;border:0;border-radius:12px;width:100%;font-size:16px}
-.container{padding:18px}
-.welcome{background:#fff;border-radius:18px;padding:20px;margin-bottom:20px}
-.welcome h2{margin:0 0 10px;color:#102d50}
-.welcome p{line-height:1.7;color:#65748b}
-.section-title{font-size:20px;margin:25px 0 15px}
-.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
-.category{background:white;border-radius:17px;padding:20px 10px;text-align:center;box-shadow:0 3px 12px #0000000b;cursor:pointer;border:1px solid #edf0f5}
-.category .emoji{font-size:35px}
-.category h3{font-size:16px;margin:10px 0 0}
-.category:active{transform:scale(.97)}
-.note{background:#fff5d9;padding:16px;border-radius:14px;margin-top:22px;line-height:1.8}
-footer{text-align:center;background:#102d50;color:white;padding:22px;margin-top:25px;line-height:1.8}
-button{background:#ffca28;border:0;padding:13px 22px;border-radius:12px;font-weight:bold;font-size:15px;cursor:pointer}
-#result{background:white;padding:15px;border-radius:14px;margin-top:15px;display:none;line-height:1.8}
+body{margin:0;background:#f3f6fa;font-family:Arial;color:#142b48}
+header{background:#102d50;color:white;padding:25px 18px;border-radius:0 0 25px 25px}
+.logo{font-size:28px;font-weight:bold;color:#ffca28}
+header p{margin-bottom:0}
+main{padding:18px}
+.welcome,.category,.result{background:white;border-radius:16px;padding:18px;margin-bottom:14px}
+.welcome h2{margin-top:0}
+button{font-family:inherit;cursor:pointer}
+.start{background:#ffca28;border:0;border-radius:10px;padding:13px 25px;font-weight:bold}
+h3{margin:15px 0}
+.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.category{border:1px solid #e5eaf1;text-align:center;min-height:120px;color:#142b48;font-size:17px;font-weight:bold}
+.category:active{background:#fff3c4}
+.emoji{font-size:35px;display:block;margin-bottom:9px}
+.result{display:none;line-height:1.8}
+.back{background:#102d50;color:white;border:0;border-radius:9px;padding:10px 20px}
+footer{text-align:center;background:#102d50;color:white;padding:22px}
 </style>
 </head>
 <body>
-
 <header>
 <div class="logo">⚡ فوه إكسبريس</div>
 <p>كل طلباتك لحد باب بيتك</p>
-<input class="search" id="search" placeholder="بتدور على إيه؟">
 </header>
 
-<div class="container">
-<div class="welcome">
+<main>
+<div class="welcome" id="home">
 <h2>أهلاً بيك في فوه إكسبريس 👋</h2>
-<p>اطلب احتياجاتك من مكانك، وإحنا نوصلها لحد عندك بكل سهولة.</p>
-<button onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">ابدأ التسوق</button>
+<p>اطلب احتياجاتك من مكانك وإحنا نوصلها لحد باب بيتك.</p>
+<button class="start" onclick="showCategories()">ابدأ التسوق</button>
 </div>
 
-<h2 class="section-title" id="categories">تسوق حسب القسم</h2>
+<section id="shop">
+<h3>تسوق حسب القسم</h3>
+<div class="categories">
+<button class="category" onclick="openCategory('مطاعم')"><span class="emoji">🍔</span>مطاعم</button>
+<button class="category" onclick="openCategory('صيدليات')"><span class="emoji">💊</span>صيدليات</button>
+<button class="category" onclick="openCategory('سوبر ماركت')"><span class="emoji">🛒</span>سوبر ماركت</button>
+<button class="category" onclick="openCategory('خضار وفاكهة')"><span class="emoji">🍎</span>خضار وفاكهة</button>
+<button class="category" onclick="openCategory('طرود وشحن')"><span class="emoji">📦</span>طرود وشحن</button>
+<button class="category" onclick="openCategory('مشاوير شخصية')"><span class="emoji">🛵</span>مشاوير شخصية</button>
+</div>
+</section>
 
-<div class="categories" id="categoryList">
-<div class="category" data-name="مطاعم"><div class="emoji">🍔</div><h3>مطاعم</h3></div>
-<div class="category" data-name="صيدليات"><div class="emoji">💊</div><h3>صيدليات</h3></div>
-<div class="category" data-name="سوبر ماركت"><div class="emoji">🛒</div><h3>سوبر ماركت</h3></div>
-<div class="category" data-name="خضار وفاكهة"><div class="emoji">🍎</div><h3>خضار وفاكهة</h3></div>
-<div class="category" data-name="طرود"><div class="emoji">📦</div><h3>طرود وشحن</h3></div>
-<div class="category" data-name="مشاوير شخصية"><div class="emoji">🛵</div><h3>مشاوير شخصية</h3></div>
+<div class="result" id="result">
+<h2 id="chosen"></h2>
+<p>القسم ده جاهز لاستقبال المحلات والطلبات. سيتم إضافة المتاجر والمنتجات قريباً.</p>
+<button class="back" onclick="goBack()">رجوع للأقسام</button>
 </div>
 
-<div id="result"></div>
-
-<div class="note">
-<strong>📍 نطاق خدمتنا</strong><br>
-خدمات فوه إكسبريس داخل مدينة فوه وضواحيها.<br>
-<strong>الجودة قبل أي حاجة ❤️</strong>
+<div class="welcome">
+<strong>📍 خدماتنا داخل فوه وضواحيها</strong>
+<p>الجودة قبل أي حاجة ❤️</p>
 </div>
-</div>
+</main>
 
-<footer>
-<strong>فوه إكسبريس</strong><br>
-طلبك علينا.. وراحتك تهمنا
-</footer>
+<footer>فوه إكسبريس | طلبك علينا وراحتك تهمنا</footer>
 
 <script>
-const categories=document.querySelectorAll('.category');
-const result=document.getElementById('result');
-categories.forEach(item=>{
-item.addEventListener('click',()=>{
-result.style.display='block';
-result.innerHTML='<strong>قسم '+item.dataset.name+'</strong><br>سيتم إضافة المتاجر والمنتجات المتاحة في هذا القسم قريباً.';
-result.scrollIntoView({behavior:'smooth',block:'center'});
-});
-});
-document.getElementById('search').addEventListener('input',function(){
-let value=this.value.trim();
-categories.forEach(item=>{
-item.style.display=item.dataset.name.includes(value)?'block':'none';
-});
-});
+function showCategories(){
+document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+}
+function openCategory(name){
+document.getElementById('shop').style.display='none';
+document.getElementById('home').style.display='none';
+document.getElementById('result').style.display='block';
+document.getElementById('chosen').textContent='قسم '+name;
+window.scrollTo(0,0);
+}
+function goBack(){
+document.getElementById('result').style.display='none';
+document.getElementById('shop').style.display='block';
+document.getElementById('home').style.display='block';
+window.scrollTo(0,0);
+}
 </script>
-
 </body>
 </html>
